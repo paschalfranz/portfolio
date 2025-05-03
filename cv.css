@@ -1,0 +1,231 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background: #000; /* Set full page background to black */
+}
+
+.cv-container {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    flex-direction: row;
+    background-color: #fff; /* Keep the CV white */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05); /* Soft glow on dark bg */
+    border-radius: 6px;
+}
+/* Left */
+.cv-left {
+    width: 30%;
+    background: #fbbcbc;
+    padding: 20px;
+}
+
+.profile-img {
+    width: 100%;
+    max-width: 250px;
+    border-radius: 50%; /* Changed to 50% for circular profile */
+    margin-bottom: 20px;
+    margin: 0 auto 20px;
+    display: block;
+    border: 3px solid red;
+}
+
+.contact {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.contact a, .link {
+    color: #5e17eb;
+    text-decoration: underline;
+    word-break: break-word;
+}
+
+.skills {
+    list-style: none;
+    padding: 0;
+    columns: 2;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* Right */
+.cv-right {
+    width: 70%;
+    padding: 40px;
+}
+
+.cv-right h1 {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.cv-buttons {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    z-index: 999;
+    display: flex;
+    gap: 12px;
+}
+
+.cv-buttons .btn {
+    background-color: red;
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease;
+}
+
+.cv-buttons .btn:hover {
+    background-color: #b30000;
+}
+
+.cv-buttons i {
+    margin-right: 6px;
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+    .cv-container {
+        flex-direction: column;
+    }
+
+    .cv-left, .cv-right {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .profile-img {
+        max-width: 200px;
+    }
+}
+
+.title-red {
+    color: red;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.intro {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.section-title {
+    margin-top: 24px;
+    font-size: 16px;
+    color: #000; /* Black color for section titles */
+}
+
+.section-title::before {
+    content: "🔴 ";
+}
+
+.item {
+    margin-bottom: 24px;
+}
+
+.item-head {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: bold;
+    flex-wrap: wrap;
+}
+
+.item ul, .cv-right ul {
+    padding-left: 20px;
+    margin-top: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.red-text {
+    color: red;
+}
+
+.signature {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.signature img {
+    width: 80px;
+    height: auto;
+}
+
+/* Additional responsive styling */
+@media screen and (max-width: 768px) {
+    .item-head {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .cv-right h1 {
+        font-size: 20px;
+    }
+
+    .title-red {
+        font-size: 15px;
+    }
+
+    .section-title {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        font-size: 13px;
+    }
+
+    .cv-right {
+        padding: 10px;
+    }
+
+    .intro {
+        font-size: 13px;
+    }
+
+    .item ul, .cv-right ul {
+        padding-left: 15px;
+        font-size: 13px;
+    }
+
+    /* Adjust skills to 3 columns on very small screens */
+    .skills {
+        columns: 3;
+        font-size: 11px;
+    }
+
+    /* Make contact info a 2x2 grid (2 rows, 2 columns) */
+    .contact {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+        grid-gap: 5px;
+    }
+
+    .contact p {
+        margin: 0;
+        font-size: 11px;
+        width: 100%;
+    }
+
+    /* Special handling for LinkedIn and GitHub links that might be longer */
+    .contact p:nth-child(5),
+    .contact p:nth-child(6) {
+        grid-column: span 2;
+    }
+}
+
