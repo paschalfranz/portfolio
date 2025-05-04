@@ -58,6 +58,8 @@ body.case-study-page {
     line-height: 1.6;
     color: var(--text-secondary);
     margin-bottom: 32px;
+    max-height: none;
+    overflow: visible;
 }
 
 .preview-button {
