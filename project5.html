@@ -2,9 +2,189 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Modernizing a Subscription Management Platform - Case Study</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="case-study.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
-<body>
+<body class="case-study-page">
 
+<div class="cursor"></div>
+<div class="cursor-trail"></div>
+
+<header class="header">
+    <div class="logo">PORTFOLIO<span class="logo-star">*</span></div>
+    <button id="menu-toggle" class="menu-toggle">+</button>
+    <nav class="nav">
+        <a href="index.html" class="nav-item" data-index="01">Home</a>
+        <a href="index.html#about" class="nav-item" data-index="02">About me</a>
+        <a href="index.html#projects" class="nav-item" data-index="03">Projects</a>
+        <a href="#get" class="nav-item" data-index="04">Get in touch</a>
+    </nav>
+</header>
+
+<!-- Project Hero Section - Two Column Layout Like Image 2 -->
+<section class="project-hero">
+    <div class="project-hero-content">
+        <div class="project-info">
+            <h1 class="project-title">Personal Portfolio: Showcasing My Projects and Edit</h1>
+
+            <p class="project-description">
+                This portfolio showcases a selection of personal projects, encompassing hobby work and video editing endeavors undertaken during leisure time. Constructed primarily with fundamental CSS and HTML, these pieces represent purely recreational pursuits and explorations in web design.
+            </p>
+
+            <a href="https://paschalifewulu.samuelumeh.com/" class="preview-button">Live Site Preview</a>
+
+            <div class="project-meta">
+                <div class="meta-col">
+                    <h3 class="meta-label">Client</h3>
+                    <p class="meta-value">Anyone</p>
+                </div>
+
+                <div class="meta-col">
+                    <h3 class="meta-label">Tools</h3>
+                    <p class="meta-value">HTML, CSS, JavaScript</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-hero-image">
+            <div class="image-frame">
+                <img src="images/blue.png" alt="Subscription Management Platform">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- The Goal Section -->
+<section class="content-section" id="the-goal">
+    <div class="case-container">
+        <div class="section-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 7V12L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+
+        <h2 class="section-title">The Goal:</h2>
+        <p class="section-description">
+            Discover my creative side! Featuring hobby projects, video editing, and hand-coded HTML/CSS web experiments. Built purely for the love of learning and creating.
+        </p>
+
+        <div class="showcase-wrapper">
+            <img src="images/goal5.png" alt="Platform Dashboard" class="showcase-image">
+        </div>
+    </div>
+
+    <div class="section-number">1</div>
+</section>
+
+<!-- The Challenge Section -->
+<section class="content-section" id="the-challenge">
+    <div class="case-container">
+        <div class="section-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 8V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M12 16V16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+
+        <h2 class="section-title">The Challenge:</h2>
+        <p class="section-description">
+            A common challenge within this project involves image positioning, which, while seemingly minor, offers a practical exercise in understanding layout and element control. These personal endeavors, alongside video editing projects, are pursued in free time as a creative outlet and a method for honing technical skills.
+        </p>
+
+        <div class="showcase-wrapper">
+            <img src="images/challenge5.png" alt="Platform Features" class="showcase-image">
+        </div>
+    </div>
+
+    <div class="section-number">2</div>
+</section>
+
+<!-- The Result Section -->
+<section class="content-section" id="the-result">
+    <div class="case-container">
+        <div class="section-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12L9 16L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+
+        <h2 class="section-title">The Result</h2>
+        <p class="section-description">
+            Constructed primarily using basic HTML and CSS, these projects were undertaken purely for enjoyment and exploration. Through their creation, I gained valuable hands-on experience in front-end development, solidifying my understanding of web design fundamentals and enhancing my video editing skills. Each project serves as a tangible outcome of my learning journey.
+        </p>
+
+        <div class="showcase-wrapper">
+            <img src="images/result5.png" alt="Platform Features" class="showcase-image">
+        </div>
+    </div>
+
+    <div class="section-number">3</div>
+</section>
+
+<div class="after-projects" id="get">
+    <div class="footer-container">
+        <!-- Profile Section -->
+        <div class="profile-section">
+            <div class="profile-image">
+                <!-- Replace with your profile image -->
+                <img src="images/bro.webp" alt="Profile" width="100" height="100">
+            </div>
+            <div class="verified-badge">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"></path>
+                </svg>
+                Learning Now, Leading Soon
+            </div>
+        </div>
+
+        <!-- Hero Text Section -->
+        <div class="hero-text">
+            <h1>Get in touch</h1>
+            <p>Feel free to contact me anytime — I’m excited to connect, answer your questions, and discuss how we can work together to achieve great things. You can find my video editing on Tiktok</p>
+        </div>
+
+        <!-- Contact Buttons -->
+        <div class="contact-buttons">
+            <p class="contact-button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.6 6.32A7.85 7.85 0 0 0 12.04 4c-4.32 0-7.84 3.5-7.84 7.81 0 1.37.37 2.72 1.05 3.9L4 20l4.41-1.15a7.92 7.92 0 0 0 3.63.92h.04c4.3 0 7.8-3.5 7.82-7.82 0-2.08-.82-4.04-2.3-5.53zM12.04 18.44h-.03a6.6 6.6 0 0 1-3.35-.92l-.24-.14-2.47.64.66-2.4-.16-.25a6.5 6.5 0 0 1-1-3.46c0-3.6 2.94-6.52 6.54-6.52a6.46 6.46 0 0 1 4.6 1.92 6.47 6.47 0 0 1 1.94 4.6c-.02 3.6-2.96 6.53-6.5 6.53zm3.58-4.88c-.2-.1-1.17-.58-1.35-.64-.18-.07-.31-.1-.44.1-.13.2-.5.64-.62.77-.11.13-.23.15-.43.05a5.44 5.44 0 0 1-2.68-2.33c-.2-.35.2-.32.58-1.08a.37.37 0 0 0-.02-.35c-.05-.1-.44-1.06-.6-1.45-.16-.38-.32-.32-.44-.33-.11 0-.24-.02-.37-.02-.13 0-.35.05-.53.25-.18.2-.7.68-.7 1.65s.72 1.92.82 2.05c.1.13 1.4 2.13 3.38 2.99.47.2.84.33 1.13.42.47.15.9.13 1.24.08.38-.06 1.17-.48 1.33-.94.17-.46.17-.85.12-.94-.05-.08-.18-.13-.37-.23z" />
+                </svg>
+                +32 484 20 90 20
+            </p>
+            <a href="mailto:your.email@example.com" class="contact-button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                </svg>
+                paschalfrancisifewulu@gmail.com
+            </a>
+        </div>
+
+        <!-- Social Icons -->
+        <div class="social-icons">
+            <a href="https://www.linkedin.com/in/paschal-ifewulu10/" class="social-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                </svg>
+            </a>
+            <a href="https://www.tiktok.com/@p.franz" class="social-icon">
+                <i class="fa-brands fa-tiktok fa-lg" style="color: #f3f4f7;"></i>
+            </a>
+        </div>
+
+        <!-- Brand Footer -->
+        <div class="brand-footer">
+            <div class="brand-logo">
+                <div class="logo">PORTFOLIO<span class="logo-star">*</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>

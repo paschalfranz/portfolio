@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     addScrollEffects();
     setupMenuToggle();
     playOpeningAnimation();
+    initSmoothScroll(); // Added smooth scrolling initialization
 
     // Simple fix for project buttons
     fixProjectButtons();
@@ -11,6 +12,69 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add the project card scroll functionality
     initLockedProjectScroll();
 });
+
+// New function for smooth scrolling
+function initSmoothScroll() {
+    // Get all navigation links
+    const navLinks = document.querySelectorAll('.nav-item');
+
+    // Add click event listener to each navigation link
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+
+            // Skip if the href is a full URL or path to another page
+            if (targetId.indexOf('http') === 0 || targetId.indexOf('/') === 0 || targetId.indexOf('.html') > -1) {
+                // Let the default behavior handle external links or other pages
+                return;
+            }
+
+            e.preventDefault(); // Prevent default anchor behavior only for same-page links
+
+            // Handle home link
+            if (targetId === "#") {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                return;
+            }
+
+            // Check if we're on the home page
+            const isHomePage = window.location.pathname === '/' ||
+                window.location.pathname.indexOf('index.html') > -1 ||
+                window.location.pathname.endsWith('/');
+
+            // If not on home page and trying to navigate to a section on home page
+            if (!isHomePage && targetId.startsWith('#')) {
+                // Navigate to home page with the hash
+                window.location.href = 'index.html' + targetId;
+                return;
+            }
+
+            // Find the target element on current page
+            const targetSection = document.querySelector(targetId);
+
+            if (targetSection) {
+                // Get the target's position, accounting for any offsets
+                const targetPosition = targetSection.getBoundingClientRect().top;
+                const offsetPosition = targetPosition + window.pageYOffset - 80; // Adjust the offset as needed
+
+                // Scroll smoothly to the target
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+
+                // If you have a mobile menu that needs to be closed after clicking
+                const nav = document.querySelector('.nav');
+                if (nav.classList.contains('active')) {
+                    document.getElementById('menu-toggle').click();
+                }
+            }
+        });
+    });
+}
 
 // Simple fix for project buttons
 function fixProjectButtons() {
