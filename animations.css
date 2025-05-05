@@ -1,0 +1,149 @@
+/* Scroll Animations */
+.animate-on-scroll {
+    opacity: 0;
+    transition: opacity 1s ease-out, transform 1s ease-out;
+    will-change: opacity, transform;
+}
+
+.animate-on-scroll.animated {
+    opacity: 1;
+    transform: translateY(0) translateX(0) scale(1) !important;
+}
+
+/* Animation variants */
+.fade-in {
+    opacity: 0;
+}
+
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.fade-in-down {
+    opacity: 0;
+    transform: translateY(-50px);
+}
+
+.fade-in-left {
+    opacity: 0;
+    transform: translateX(-50px);
+}
+
+.fade-in-right {
+    opacity: 0;
+    transform: translateX(50px);
+}
+
+.scale-in {
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+/* Staggered animations for child elements */
+.animate-children > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.animate-children.animated > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Adding staggered delay for child elements */
+.animate-children.animated > *:nth-child(1) { transition-delay: 0.1s; }
+.animate-children.animated > *:nth-child(2) { transition-delay: 0.2s; }
+.animate-children.animated > *:nth-child(3) { transition-delay: 0.3s; }
+.animate-children.animated > *:nth-child(4) { transition-delay: 0.4s; }
+.animate-children.animated > *:nth-child(5) { transition-delay: 0.5s; }
+.animate-children.animated > *:nth-child(6) { transition-delay: 0.6s; }
+
+/* Custom animations for specific elements */
+.hero-name.animated {
+    animation: textGradient 3s ease-in-out forwards;
+}
+
+@keyframes textGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Slide-in animation for project cards */
+.project-card {
+    transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1),
+    opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Smooth reveal animation for sections */
+.reveal-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.reveal-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--accent);
+    transform: translateX(-100%);
+    z-index: 1;
+}
+
+.reveal-section.animated::after {
+    animation: revealSection 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+@keyframes revealSection {
+    0% {
+        transform: translateX(-100%);
+    }
+    50% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Custom animation for the overlay opening */
+.overlay-top,
+.overlay-bottom {
+    background-color: var(--accent);
+    transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* Loading animation for images */
+.image-loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.image-loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: imageSkeleton 1.5s infinite;
+    z-index: 1;
+}
+
+@keyframes imageSkeleton {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
