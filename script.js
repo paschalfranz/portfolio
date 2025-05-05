@@ -96,14 +96,17 @@ function playOpeningAnimation() {
     const overlayTop = document.querySelector('.overlay-top');
     const overlayBottom = document.querySelector('.overlay-bottom');
 
-    setTimeout(() => {
-        overlayTop.style.transform = 'scaleY(0)';
-        overlayBottom.style.transform = 'scaleY(0)';
-    }, 800);
+    if (overlayTop && overlayBottom) {
+        setTimeout(() => {
+            overlayTop.style.transform = 'scaleY(0)';
+            overlayBottom.style.transform = 'scaleY(0)';
+        }, 800);
 
-    setTimeout(() => {
-        document.querySelector('.overlay').style.display = 'none';
-    }, 2000);
+        setTimeout(() => {
+            const overlay = document.querySelector('.overlay');
+            if (overlay) overlay.style.display = 'none';
+        }, 2000);
+    }
 }
 
 // ✨ Hamburger Menu Toggle
@@ -111,16 +114,20 @@ function setupMenuToggle() {
     const menuToggle = document.getElementById('menu-toggle');
     const nav = document.querySelector('.nav');
 
-    menuToggle.addEventListener('click', () => {
-        nav.classList.toggle('active');
-        menuToggle.innerHTML = nav.classList.contains('active') ? '✖' : '+';
-    });
+    if (menuToggle && nav) {
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            menuToggle.innerHTML = nav.classList.contains('active') ? '✖' : '+';
+        });
+    }
 }
 
 // ✨ Custom Cursor
 function initCursorEffects() {
     const cursor = document.querySelector('.cursor');
     const cursorTrail = document.querySelector('.cursor-trail');
+
+    if (!cursor || !cursorTrail) return;
 
     cursor.style.opacity = '0';
     cursorTrail.style.opacity = '0';
@@ -165,7 +172,7 @@ function initCursorEffects() {
     });
 }
 
-// ✨ Particle System
+// ✨ Particle System with theme-aware colors
 function createParticleSystem() {
     let lastMouseX = 0, lastMouseY = 0, mouseSpeed = 0;
     document.addEventListener('mousemove', (e) => {
@@ -188,10 +195,25 @@ function createParticle(x, y, speed) {
     const particle = document.createElement('div');
     particle.className = 'particle';
     const size = Math.random() * (speed / 10) + 3;
-    const hue = 0;
-    const saturation = Math.floor(Math.random() * 30) + 70;
-    const lightness = Math.floor(Math.random() * 30) + 60;
-    const alpha = Math.random() * 0.3 + 0.1;
+
+    // Check current theme
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+    let hue, saturation, lightness, alpha;
+
+    if (currentTheme === 'light') {
+        // Pure black particles for light mode
+        // Inside the if (currentTheme === 'light') block:
+        hue = 0;
+        saturation = 0; // 0% saturation = gray/black
+        lightness = 0; // 0% lightness = black
+        alpha = Math.random() * 0.15 + 0.05; // More subtle
+    } else {
+        // Red particles for dark theme (original)
+        hue = 0;
+        saturation = Math.floor(Math.random() * 30) + 70;
+        lightness = Math.floor(Math.random() * 30) + 60;
+        alpha = Math.random() * 0.3 + 0.1;
+    }
 
     particle.style.width = size + 'px';
     particle.style.height = size + 'px';
@@ -239,21 +261,37 @@ function addScrollEffects() {
     const heroImage = document.querySelector('.hero-image');
     const heroName = document.querySelector('.hero-name');
     const introText = document.querySelector('.intro-text');
+    const header = document.querySelector('.header');
 
     window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
 
+        // Add scrolled class to header
+        if (scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+
         if (heroImage) {
             heroImage.style.transform = `translateY(${scrollY * 0.2}px) scale(1.05)`;
         }
-        if (scrollY > 50) {
-            heroName.style.opacity = 1 - (scrollY - 50) / 300;
-            introText.style.opacity = 1 - (scrollY - 50) / 300;
-        } else {
-            heroName.style.opacity = 1;
-            introText.style.opacity = 1;
+
+        if (heroName && introText) {
+            if (scrollY > 50) {
+                heroName.style.opacity = 1 - (scrollY - 50) / 300;
+                introText.style.opacity = 1 - (scrollY - 50) / 300;
+            } else {
+                heroName.style.opacity = 1;
+                introText.style.opacity = 1;
+            }
         }
     });
+
+    // Check initial scroll position
+    if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+    }
 }
 
 // ✨ Locked Project Scroll (Only exits after trying to scroll past the edge)
@@ -449,6 +487,7 @@ function initLockedProjectScroll() {
                             unlockScroll();
                         }
                     } else {
+                        last
                         lastDirection = 'up';
                         scrollAttempts = 1;
                     }

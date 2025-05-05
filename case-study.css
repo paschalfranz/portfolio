@@ -1,5 +1,6 @@
-/* Case Study Styles - Matching Exactly Image 2 Layout */
+/* Case Study Styles - With Theme Variables Support */
 :root {
+    /* These will be overridden by the main theme.css variables */
     --dark-bg: #000000;
     --content-bg: #0a0a0a;
     --card-bg: #111111;
@@ -10,8 +11,8 @@
 }
 
 body.case-study-page {
-    background-color: var(--dark-bg);
-    color: var(--text);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
 }
 
 .case-container {
@@ -27,7 +28,7 @@ body.case-study-page {
     display: flex;
     align-items: center;
     padding: 120px 0 80px;
-    background-color: var(--dark-bg);
+    background-color: var(--bg-primary);
 }
 
 .project-hero-content {
@@ -51,6 +52,7 @@ body.case-study-page {
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 24px;
+    color: var(--text-primary);
 }
 
 .project-description {
@@ -67,16 +69,17 @@ body.case-study-page {
     padding: 14px 24px;
     background-color: rgba(255, 255, 255, 0.08);
     border-radius: 40px;
-    color: var(--text);
+    color: var(--text-primary);
     text-decoration: none;
     font-weight: 500;
     margin-bottom: 48px;
     transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--accent);
 }
 
 .preview-button:hover {
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: var(--accent);
+    color: white;
     transform: translateY(-2px);
 }
 
@@ -95,6 +98,7 @@ body.case-study-page {
 .meta-value {
     font-size: 16px;
     font-weight: 500;
+    color: var(--text-primary);
 }
 
 .project-hero-image {
@@ -103,10 +107,10 @@ body.case-study-page {
 }
 
 .image-frame {
-    background-color: #1a1a1a;
+    background-color: var(--bg-tertiary);
     border-radius: 16px;
     padding: 24px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 20px 50px var(--card-shadow);
     overflow: hidden;
 }
 
@@ -121,7 +125,7 @@ body.case-study-page {
 .content-section {
     padding: var(--section-spacing) 0;
     position: relative;
-    background-color: var(--content-bg);
+    background-color: var(--bg-secondary);
     min-height: 600px;
     display: flex;
     align-items: center;
@@ -132,13 +136,14 @@ body.case-study-page {
     align-items: center;
     justify-content: center;
     margin-bottom: 24px;
-    color: var(--text);
+    color: var(--text-primary);
 }
 
 .section-title {
     font-size: 32px;
     font-weight: 700;
     margin-bottom: 24px;
+    color: var(--text-primary);
 }
 
 .section-description {
@@ -153,9 +158,9 @@ body.case-study-page {
     margin-top: 48px;
     border-radius: 16px;
     overflow: hidden;
-    background-color: #1a1a1a;
+    background-color: var(--bg-tertiary);
     padding: 24px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 20px 40px var(--card-shadow);
 }
 
 .showcase-image {
@@ -171,8 +176,8 @@ body.case-study-page {
     right: 24px;
     font-size: 20px;
     font-weight: 700;
-    color: var(--text);
-    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    background-color: rgba(255, 62, 62, 0.1);
     width: 36px;
     height: 36px;
     border-radius: 50%;
@@ -190,7 +195,7 @@ body.case-study-page {
 }
 
 .result-image {
-    background-color: #1a1a1a;
+    background-color: var(--bg-tertiary);
     padding: 16px;
     border-radius: 16px;
     overflow: hidden;
@@ -198,15 +203,31 @@ body.case-study-page {
 
 /* Alternate section backgrounds */
 #the-goal {
-    background-color: var(--dark-bg);
+    background-color: var(--bg-primary);
 }
 
 #the-challenge {
-    background-color: var(--content-bg);
+    background-color: var(--bg-secondary);
 }
 
 #the-result {
-    background-color: var(--dark-bg);
+    background-color: var(--bg-primary);
+}
+
+/* Special light theme adjustments */
+[data-theme="light"] .project-title {
+    background: linear-gradient(90deg, var(--text-primary), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+[data-theme="light"] .preview-button {
+    background-color: rgba(204, 0, 0, 0.1);
+}
+
+[data-theme="light"] .showcase-wrapper {
+    background-color: white;
 }
 
 /* Responsive Styles */

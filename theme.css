@@ -1,0 +1,514 @@
+/* Theme Variables & Toggle Styles */
+:root {
+    /* Base colors - Dark Theme (Default) */
+    --bg-primary: #000000;
+    --bg-secondary: #000000;
+    --bg-tertiary: #1a1a1a;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --accent: #ff3e3e;
+    --accent-hover: #ff6e6e;
+    --card-bg: #121212;
+    --card-shadow: rgba(0, 0, 0, 0.7);
+    --header-bg: rgba(0, 0, 0, 0.8);
+    --header-text: #ffffff;
+    --footer-bg: #000000;
+    --footer-text: #ffffff;
+    --cursor-color: rgba(255, 62, 62, 0.5);
+    --cursor-trail: rgba(255, 62, 62, 0.2);
+
+    /* Content section backgrounds for case studies */
+    --dark-bg: #000000;
+    --content-bg: #000000;
+    --case-card-bg: #1a1a1a;
+    --project-hero-bg: #000000;
+
+    /* Animation durations */
+    --transition-speed: 0.4s;
+}
+
+/* Light Theme Colors */
+[data-theme="light"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #ffeeee;
+    --bg-tertiary: #fff5f5;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --accent: #cc0000;
+    --accent-hover: #ff0000;
+    --card-bg: #ffffff;
+    --card-shadow: rgba(0, 0, 0, 0.1);
+    --header-bg: rgba(255, 255, 255, 0.9);
+    --header-text: #990000; /* Dark red for header text */
+    --footer-bg: #ffeeee;
+    --footer-text: #333333;
+    --cursor-color: rgba(0, 0, 0, 0.5); /* Black cursor for light mode */
+    --cursor-trail: rgba(0, 0, 0, 0.2); /* Black trail for light mode */
+
+    /* Content section backgrounds for case studies */
+    --dark-bg: #fff5f5;
+    --content-bg: #ffeeee;
+    --case-card-bg: #ffffff;
+    --project-hero-bg: linear-gradient(to bottom, #cc0000, #ffffff); /* Red to white gradient */
+}
+
+/* Theme transition effect */
+.theme-transition,
+.theme-transition *,
+.theme-transition *:before,
+.theme-transition *:after {
+    transition: all 0.5s ease-in-out !important;
+    transition-delay: 0s !important;
+}
+
+/* Theme toggle button with yellow styling for light mode */
+.theme-toggle {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--header-text);
+    font-size: 20px;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-right: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    z-index: 100;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle:hover {
+    background-color: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+/* Updated: Yellow sun icon in light mode */
+[data-theme="light"] .theme-toggle {
+    background: rgba(255, 215, 0, 0.2); /* Light yellow background */
+    border: 1px solid rgba(255, 215, 0, 0.6); /* Yellow border */
+    color: #FFD700; /* Gold color for the sun icon */
+}
+
+[data-theme="light"] .theme-toggle:hover {
+    background-color: rgba(255, 215, 0, 0.4); /* Brighter yellow on hover */
+    color: #FFA500; /* More orange on hover */
+    border-color: #FFD700;
+}
+
+/* Transparent header initially */
+.header {
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+}
+
+/* Scrolled header with background */
+.header.scrolled {
+    background-color: var(--header-bg);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure logo and nav items have proper color in header */
+.logo, .nav-item {
+    color: #ffffff; /* Always white in hero section */
+    transition: color 0.3s ease;
+}
+
+/* Change nav items color when header is scrolled in light mode */
+[data-theme="light"] .header.scrolled .logo,
+[data-theme="light"] .header.scrolled .nav-item {
+    color: var(--header-text);
+}
+
+/* Keep logo-star and star accent colored in both themes */
+.logo-star, .star {
+    color: var(--accent);
+}
+
+/* Keep hero text white in both themes */
+.hero-content, .hero-name, .intro-text {
+    color: #ffffff !important;
+}
+
+/* Apply theme variables to all other elements */
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+/* Cursor styles based on theme */
+.cursor {
+    background-color: var(--cursor-color);
+}
+
+.cursor-trail {
+    background: radial-gradient(circle, var(--cursor-trail) 0%, rgba(255, 62, 62, 0) 70%);
+}
+
+/* Particle color adjustment will be in the script.js update */
+
+/* About section styling */
+.about-me-section {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.about-title {
+    color: var(--text-primary);
+}
+
+.about-left-card, .about-right-card {
+    background: var(--bg-tertiary);
+    box-shadow: 0 10px 30px var(--card-shadow);
+    color: var(--text-primary);
+}
+
+.about-description {
+    color: var(--text-secondary);
+}
+
+.about-card-text h3, .about-card-text p {
+    color: var(--text-primary);
+}
+
+.highlight {
+    color: var(--accent);
+}
+
+.section-subtitle {
+    color: var(--accent);
+}
+
+/* Hobbies and dreams */
+.hobby-marquee span {
+    background-color: var(--bg-tertiary);
+    border-color: var(--accent);
+    color: var(--text-primary);
+}
+
+.dreams-list div {
+    background-color: var(--bg-tertiary);
+    border-left-color: var(--accent);
+    color: var(--text-primary);
+}
+
+/* Projects section */
+.projects-section {
+    background-color: var(--bg-secondary);
+}
+
+.section-title {
+    color: var(--text-primary);
+}
+
+.project-card {
+    background: var(--bg-tertiary);
+    box-shadow: 0 10px 30px var(--card-shadow);
+}
+
+.project-title {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .project-title {
+    background: linear-gradient(90deg, var(--accent), #ff6666);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.project-description {
+    color: var(--text-secondary);
+}
+
+.metric-title {
+    color: var(--text-secondary);
+}
+
+.metric-value {
+    color: var(--text-primary);
+}
+
+.project-button {
+    background: rgba(30, 30, 30, 0.3);
+    color: var(--text-primary);
+    border-color: var(--accent);
+}
+
+.project-button:hover {
+    background: rgba(255, 62, 62, 0.2);
+    border-color: var(--accent);
+}
+
+.indicator {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.indicator.active {
+    background-color: var(--accent);
+}
+
+/* Footer styling */
+.after-projects {
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+}
+
+.verified-badge {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.hero-text h1 {
+    color: var(--footer-text);
+}
+
+.hero-text p {
+    color: var(--footer-text);
+}
+
+.social-icon {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--footer-text);
+}
+
+.social-icon:hover {
+    background-color: var(--accent);
+    color: white !important;
+    transform: translateY(-3px);
+}
+
+/* Fix for social icons in light mode */
+[data-theme="light"] .social-icon svg {
+    color: var(--footer-text) !important;
+}
+
+[data-theme="light"] .social-icon i {
+    color: var(--footer-text) !important;
+}
+
+.contact-button {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--footer-text);
+}
+
+.contact-button:hover {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: white;
+}
+
+/* Fix for brand logo in footer */
+.brand-footer .logo {
+    color: var(--footer-text);
+}
+
+/* Case study page specific theme adjustments */
+.case-study-page {
+    background-color: var(--bg-primary);
+}
+
+/* Updated: Project hero with gradient background in light mode */
+.project-hero {
+    background: var(--project-hero-bg);
+}
+
+.project-hero .project-title {
+    color: var(--text-primary);
+}
+
+.project-hero .project-description {
+    color: var(--text-secondary);
+}
+
+.meta-label {
+    color: var(--text-secondary);
+}
+
+.meta-value {
+    color: var(--text-primary);
+}
+
+.preview-button {
+    color: var(--text-primary);
+    border-color: var(--accent);
+}
+
+.preview-button:hover {
+    background-color: var(--accent);
+    color: white;
+}
+
+/* Case study content sections - fixing these for light mode */
+.content-section {
+    background-color: var(--content-bg);
+}
+
+#the-goal, #the-challenge, #the-result {
+    background-color: var(--dark-bg);
+}
+
+.section-icon {
+    color: var(--text-primary);
+}
+
+.section-title {
+    color: var(--text-primary);
+}
+
+.section-description {
+    color: var(--text-secondary);
+}
+
+.showcase-wrapper {
+    background-color: var(--case-card-bg);
+    box-shadow: 0 20px 40px var(--card-shadow);
+}
+
+.section-number {
+    color: var(--text-primary);
+    background-color: rgba(255, 62, 62, 0.1);
+}
+
+/* CV page theme adjustments */
+.cv-container {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.cv-left {
+    background: var(--bg-secondary);
+}
+
+.cv-right {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.title-red, .red-text {
+    color: var(--accent);
+}
+
+.cv-buttons .btn {
+    background-color: var(--accent);
+}
+
+.cv-buttons .btn:hover {
+    background-color: var(--accent-hover);
+}
+
+/* Light theme red gradients and accents */
+[data-theme="light"] {
+    --gradient-accent-1: #ffeeee;
+    --gradient-accent-2: #ffdddd;
+    --gradient-accent-3: #ffcccc;
+}
+
+[data-theme="light"] .about-left-card {
+    background: linear-gradient(to bottom, var(--gradient-accent-2), var(--gradient-accent-3));
+}
+
+[data-theme="light"] .about-right-card {
+    background: linear-gradient(to bottom, var(--gradient-accent-1), var(--gradient-accent-2));
+}
+
+[data-theme="light"] .project-card {
+    background: linear-gradient(to bottom, var(--gradient-accent-1), var(--gradient-accent-2));
+}
+
+/* Fix for image frame in case study pages */
+.image-frame {
+    background-color: var(--bg-tertiary);
+}
+
+/* Update case study CSS variables */
+[data-theme="light"] .case-study-page {
+    --dark-bg: #fff5f5;
+    --content-bg: #ffeeee;
+    --card-bg: #ffffff;
+    --text: #333333;
+    --text-secondary: #666666;
+}
+/* Adjust red gradient to move up a bit in light mode */
+[data-theme="light"] .project-hero {
+    background: linear-gradient(to bottom, #cc0000 30%, #ffffff 100%); /* Red to white with red moved up */
+}
+
+/* Change header text color to yellow on red gradient for better visibility */
+[data-theme="light"] .header:not(.scrolled) .logo,
+[data-theme="light"] .header:not(.scrolled) .nav-item {
+    color: #FFD700 !important; /* Gold/yellow text for visibility on red */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); /* Subtle shadow for better readability */
+}
+
+/* Make theme toggle match the yellow text */
+[data-theme="light"] .theme-toggle {
+    background: rgba(255, 215, 0, 0.2); /* Light yellow background */
+    border: 1px solid rgba(255, 215, 0, 0.6); /* Yellow border */
+    color: #FFD700; /* Gold color for the sun icon */
+}
+
+/* Keep the project title and description in appropriate color for readability */
+[data-theme="light"] .project-hero .project-title {
+    color: #FFD700; /* Gold/yellow for the title */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    background: none; /* Remove any gradient */
+    -webkit-text-fill-color: #FFD700; /* Override any fill color */
+}
+
+[data-theme="light"] .project-hero .project-description {
+    color: #ffffff; /* White for description text */
+}
+
+/* Menu toggle button color */
+[data-theme="light"] .header:not(.scrolled) .menu-toggle {
+    color: #FFD700 !important;
+}
+
+/* Make the cursor fully black and clearly visible in light mode */
+[data-theme="light"] .cursor {
+    background-color: #000000 !important; /* Pure black cursor */
+    width: 24px !important; /* Slightly larger */
+    height: 24px !important;
+    opacity: 0.8 !important; /* Make it visible but not too harsh */
+    mix-blend-mode: normal !important; /* Regular blend mode instead of screen */
+    border: 1px solid rgba(255, 255, 255, 0.4); /* Subtle white border for visibility */
+}
+
+[data-theme="light"] .cursor-trail {
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 70%) !important;
+    mix-blend-mode: normal !important; /* Regular blend mode for visibility */
+}
+
+/* Keep the original transitions for smooth size changes */
+.cursor {
+    transition: width 0.2s, height 0.2s, background-color 0.2s, border 0.2s !important;
+}
+
+/* Ensure the dark mode cursor retains its original style */
+[data-theme="dark"] .cursor {
+    background-color: rgba(255, 62, 62, 0.5) !important;
+    mix-blend-mode: screen !important;
+    border: none !important;
+}
+
+[data-theme="dark"] .cursor-trail {
+    background: radial-gradient(circle, rgba(255, 62, 62, 0.2) 0%, rgba(255, 62, 62, 0) 70%) !important;
+    mix-blend-mode: screen !important;
+}
+
+/* Fix cursor visibility on button hover in light mode */
+[data-theme="light"] a:hover ~ .cursor,
+[data-theme="light"] button:hover ~ .cursor,
+[data-theme="light"] .nav-item:hover ~ .cursor {
+    background-color: #000000 !important;
+    opacity: 0.9 !important;
+    width: 40px !important;
+    height: 40px !important;
+}
