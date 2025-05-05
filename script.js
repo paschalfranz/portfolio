@@ -295,10 +295,12 @@ function addScrollEffects() {
 }
 
 // ✨ Locked Project Scroll (Only exits after trying to scroll past the edge)
+// Replace your existing initLockedProjectScroll function with this one
 function initLockedProjectScroll() {
     const projectCards = document.querySelectorAll('.project-card');
     const indicators = document.querySelectorAll('.indicator');
     const projectsSection = document.querySelector('.projects-section');
+    const projectButtons = document.querySelectorAll('.project-button');
 
     if (!projectCards.length || !projectsSection) return;
 
@@ -314,6 +316,28 @@ function initLockedProjectScroll() {
     let scrollAttempts = 0;
     let lastDirection = null;
     let isProcessingScroll = false;
+
+    // Capture original button click behavior
+    projectButtons.forEach(button => {
+        // Store the original href
+        const href = button.getAttribute('href');
+
+        // Replace with a direct click handler
+        button.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (href) {
+                window.location.href = href;
+            }
+            return false;
+        });
+
+        // Set important styles directly on the button element
+        button.style.zIndex = "1000";
+        button.style.position = "relative";
+        button.style.pointerEvents = "auto";
+        button.style.opacity = "1";
+        button.style.cursor = "pointer";
+    });
 
     // Set initial active card
     updateActiveCard(0);
@@ -404,7 +428,7 @@ function initLockedProjectScroll() {
     let touchStartY = 0;
 
     projectsSection.addEventListener('touchstart', (e) => {
-        // Don't handle touch events on buttons
+        // Skip if the touch is on a button
         if (e.target.closest('.project-button')) {
             return;
         }
@@ -412,15 +436,15 @@ function initLockedProjectScroll() {
         if (isProjectsActive) {
             touchStartY = e.touches[0].clientY;
         }
-    });
+    }, { passive: true });
 
     projectsSection.addEventListener('touchmove', (e) => {
-        if (!isProjectsActive || isProcessingScroll) return;
-
-        // Don't prevent default if touching a button
+        // Skip if the touch is on a button
         if (e.target.closest('.project-button')) {
             return;
         }
+
+        if (!isProjectsActive || isProcessingScroll) return;
 
         const touchY = e.touches[0].clientY;
         const diff = touchStartY - touchY;
@@ -437,12 +461,12 @@ function initLockedProjectScroll() {
     }, { passive: false });
 
     projectsSection.addEventListener('touchend', (e) => {
-        if (!isProjectsActive || isProcessingScroll) return;
-
-        // Don't process touch events on buttons
+        // Skip if the touch is on a button
         if (e.target.closest('.project-button')) {
             return;
         }
+
+        if (!isProjectsActive || isProcessingScroll) return;
 
         const touchEndY = e.changedTouches[0].clientY;
         const diff = touchStartY - touchEndY;
@@ -487,42 +511,22 @@ function initLockedProjectScroll() {
                             unlockScroll();
                         }
                     } else {
-                        last
                         lastDirection = 'up';
                         scrollAttempts = 1;
                     }
                 }
             }
         }
-    });
-
-    // Handle scroll events to determine when to lock/unlock the viewport
-    function handleScroll() {
-        const projectsRect = projectsSection.getBoundingClientRect();
-        const viewportMiddle = window.innerHeight / 2;
-
-        // Check if projects section is in the middle of the viewport
-        if (projectsRect.top <= viewportMiddle && projectsRect.bottom >= viewportMiddle) {
-            // Entered projects section
-            if (!isProjectsActive) {
-                enterProjectsSection();
-            }
-        } else {
-            // Exited projects section
-            if (isProjectsActive) {
-                exitProjectsSection();
-            }
-        }
-    }
+    }, { passive: true });
 
     // Handle wheel events when in projects section
     function handleWheel(e) {
-        if (!isProjectsActive || isProcessingScroll) return;
-
-        // Don't prevent scrolling if hovering over a button
+        // Skip if the wheel event is on a button
         if (e.target.closest('.project-button')) {
             return;
         }
+
+        if (!isProjectsActive || isProcessingScroll) return;
 
         const scrollingDown = e.deltaY > 0;
 
@@ -581,6 +585,25 @@ function initLockedProjectScroll() {
         }
     }
 
+    // Handle scroll events to determine when to lock/unlock the viewport
+    function handleScroll() {
+        const projectsRect = projectsSection.getBoundingClientRect();
+        const viewportMiddle = window.innerHeight / 2;
+
+        // Check if projects section is in the middle of the viewport
+        if (projectsRect.top <= viewportMiddle && projectsRect.bottom >= viewportMiddle) {
+            // Entered projects section
+            if (!isProjectsActive) {
+                enterProjectsSection();
+            }
+        } else {
+            // Exited projects section
+            if (isProjectsActive) {
+                exitProjectsSection();
+            }
+        }
+    }
+
     // Enter projects section
     function enterProjectsSection() {
         isProjectsActive = true;
@@ -589,6 +612,9 @@ function initLockedProjectScroll() {
         // Reset state tracking
         scrollAttempts = 0;
         lastDirection = null;
+
+        // Make all buttons clickable again
+        makeButtonsClickable();
     }
 
     // Exit projects section
@@ -597,21 +623,27 @@ function initLockedProjectScroll() {
         unlockScroll();
     }
 
+    // Helper function to ensure buttons remain clickable
+    function makeButtonsClickable() {
+        projectButtons.forEach(button => {
+            button.style.zIndex = "1000";
+            button.style.position = "relative";
+            button.style.pointerEvents = "auto";
+            button.style.opacity = "1";
+            button.style.cursor = "pointer";
+        });
+    }
+
     // Lock scroll to projects section
     function lockScroll() {
         if (isLocked) return;
 
         isLocked = true;
         document.body.style.overflow = 'hidden';
-        scrollController.style.pointerEvents = 'auto';
+        scrollController.style.pointerEvents = 'none';
 
-        // Make sure project buttons are clickable
-        const projectButtons = document.querySelectorAll('.project-button');
-        projectButtons.forEach(button => {
-            button.style.zIndex = '1000';
-            button.style.position = 'relative';
-            button.style.pointerEvents = 'auto';
-        });
+        // Make buttons clickable
+        makeButtonsClickable();
 
         window.scrollTo({
             top: projectsSection.offsetTop,
@@ -667,9 +699,33 @@ function initLockedProjectScroll() {
             }
         });
 
-        // Re-enable scroll processing after animation completes
+        // Make buttons clickable after animation
         setTimeout(() => {
+            makeButtonsClickable();
             isProcessingScroll = false;
-        }, 400);
+        }, 500);
     }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    // CV button in homepage
+    const cvButton = document.querySelector('.cv-button');
+    if (cvButton) {
+        cvButton.setAttribute('target', '_blank');
+        cvButton.setAttribute('rel', 'noopener noreferrer');
+    }
+
+    // Live Site Preview buttons in project pages
+    const previewButtons = document.querySelectorAll('.preview-button');
+    previewButtons.forEach(button => {
+        button.setAttribute('target', '_blank');
+        button.setAttribute('rel', 'noopener noreferrer');
+    });
+
+    // Social media links in footer
+    const socialIcons = document.querySelectorAll('.social-icon');
+    socialIcons.forEach(icon => {
+        icon.setAttribute('target', '_blank');
+        icon.setAttribute('rel', 'noopener noreferrer');
+    });
+});

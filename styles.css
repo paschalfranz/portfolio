@@ -1190,3 +1190,68 @@ hr {
         word-wrap: break-word;
     }
 }
+/* Additional CSS to ensure project buttons are always clickable */
+
+/* Increase z-index for project buttons to ensure they're always on top */
+.project-button {
+    position: relative;
+    z-index: 1000 !important; /* Even higher z-index to stay above all elements */
+    pointer-events: auto !important; /* Always capture pointer events */
+    cursor: pointer !important; /* Always show pointer cursor */
+}
+
+/* Make buttons visible in all card states */
+.project-card .project-button,
+.project-card.active .project-button,
+.project-card.prev-1 .project-button,
+.project-card.prev-2 .project-button,
+.project-card.next-1 .project-button,
+.project-card.next-2 .project-button {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 1000 !important;
+}
+
+/* Ensure scroll controller stays below buttons */
+.scroll-controller {
+    z-index: 90 !important; /* Lower than buttons */
+}
+
+/* Enhance hover effect for better visibility */
+.project-button:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+    background: rgba(255, 62, 62, 0.3) !important;
+}
+
+/* Force pointer events on button parent elements */
+.project-actions {
+    pointer-events: auto !important;
+    z-index: 999 !important;
+}
+
+/* Ensure project content doesn't interfere with button clicks */
+.project-content {
+    pointer-events: auto !important;
+}
+
+/* Fix for existing styles that might interfere */
+.project-card.prev-1,
+.project-card.prev-2,
+.project-card.next-1,
+.project-card.next-2 {
+    pointer-events: none !important;
+}
+
+.project-card.prev-1 .project-button,
+.project-card.prev-2 .project-button,
+.project-card.next-1 .project-button,
+.project-card.next-2 .project-button {
+    pointer-events: auto !important;
+}
+
+/* Make sure theme toggle and other buttons remain on top */
+.theme-toggle,
+.menu-toggle {
+    z-index: 1001 !important;
+}
