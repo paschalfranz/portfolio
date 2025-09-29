@@ -46,12 +46,16 @@ body {
 }
 
 .skills {
-    list-style: none;
-    padding: 0;
-    columns: 2;
+    list-style: disc;        /* show bullets */
+    list-style-position: outside;
+    padding-left: 20px;      /* indent bullets nicely */
+    margin: 0;
+    columns: 1;              /* single, straight column on desktop */
     font-size: 13px;
     line-height: 1.5;
 }
+.skills li { margin-bottom: 4px; }
+
 
 /* Right */
 .cv-right {
